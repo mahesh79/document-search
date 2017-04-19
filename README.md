@@ -38,6 +38,6 @@ modularized development of varying versions of document search.
    Search terms are randomly selected from a consolidated list of words in the provided
    files.
    Here is an illustrative comparison graph snapshot:
-   ![performance_graph](performance_graph.png){:height="20px" width="20px"}
+   ![performance_graph](performance_graph.png)
 
 ## Recommendation for Scalability: <Placeholder>
