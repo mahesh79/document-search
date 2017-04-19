@@ -1,0 +1,63 @@
+task wrapper(type: Wrapper) {
+	gradleVersion = '3.3'
+	distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+
+buildscript {
+	ext {
+		springBootVersion = '1.5.2.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+jar {
+	baseName = 'target-document-search'
+	version =  '0.1.0'
+	from {
+		(configurations.runtime).collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+	}
+	manifest {
+		attributes("Main-Class": "com.tgt.documentsearch.DocumentsearchApplication" )
+	}
+}
+
+
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+// enable html report
+test {
+	testLogging {
+		events "passed", "skipped", "failed", "standardError", "standardOut"
+	}
+	reports {
+		junitXml.enabled = false
+		html.enabled = true
+	}
+	return null
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter')
+	compile group: 'org.projectlombok', name: 'lombok', version: '1.16.12'
+	compile group: 'commons-io', name: 'commons-io', version: '2.5'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}

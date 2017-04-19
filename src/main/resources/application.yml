@@ -1,0 +1,9 @@
+logging:
+  file: document-search.log
+
+logging.pattern.console:
+
+directory:
+  path:
+    for:
+      search: "../../src/main/resources/sample_text"
